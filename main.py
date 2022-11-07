@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 def GetAccessToken():
     """
     Connect to the We Chat Work API and get an access token.
@@ -24,8 +25,9 @@ def GetAccessToken():
 
     return token
 
+
 token = GetAccessToken()
-if token == None:
+if token is None:
     print('ERROR! Unable to get token, please check your corp ID or corp secret.')
     sys.exit()
 
@@ -34,13 +36,13 @@ json_data = {
     "agentid": agentid,
     "touser": touser,
     "msgtype": msgtype,
-    "text" : {
-       "content" : "Test!\n<a href=\"http://example.com\">example.com</a>"
-   },
+    "text": {
+       "content": "Test!\n<a href=\"http://example.com\">example.com</a>",
+            },
 }
 
 url = f'https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={token}'
-res = requests.post(url, data = json.dumps(json_data))
+res = requests.post(url, data=json.dumps(json_data))
 if res.status_code != 200:
     print(f'ERROR! Status code: {res.status_code}')
     sys.exit()
